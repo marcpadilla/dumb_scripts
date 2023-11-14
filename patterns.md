@@ -5,3 +5,5 @@
 
 
 grep -Eo '\b[a-zA-Z]+tps?://[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/))' file.txt
+
+grep -Eo '\b([a-zA-Z]+tps?)://([a-zA-Z0-9.-]+\.[a-zA-Z]{2,})(/|$)' file.txt
