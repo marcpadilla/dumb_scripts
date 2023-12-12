@@ -24,8 +24,8 @@ total_lines=$(wc -l < "$file")
 if [[ "$3" == "--progress" || "$3" == "-p" ]]; then
     # Use grep -E to search for the pattern, pipe the output through 'pv' for progress tracking,
     # and then process the results with sorting, counting, and formatting.
-    grep -E -io "$pattern" "$file" | pv -l -s "$total_lines" -N "grep progress" | sort | uniq -c | sort -nr | awk '{lines[NR]=$0; if (length($1) > max) max = length($1);} END { for (i=1; i<=NR; i++) { split(lines[i], fields); printf "%" max "d %s\n", fields[1], fields[2]; }}'
+    grep -ioP "$pattern" "$file" | pv -l -s "$total_lines" -N "grep progress" | sort | uniq -c | sort -nr | awk '{lines[NR]=$0; if (length($1) > max) max = length($1);} END { for (i=1; i<=NR; i++) { split(lines[i], fields); printf "%" max "d %s\n", fields[1], fields[2]; }}'
 else
     # Use grep -E to search for the pattern and process the results with sorting, counting, and formatting.
-    grep -E -io "$pattern" "$file" | sort | uniq -c | sort -nr | awk '{lines[NR]=$0; if (length($1) > max) max = length($1);} END { for (i=1; i<=NR; i++) { split(lines[i], fields); printf "%" max "d %s\n", fields[1], fields[2]; }}'
+    grep -ioP "$pattern" "$file" | sort | uniq -c | sort -nr | awk '{lines[NR]=$0; if (length($1) > max) max = length($1);} END { for (i=1; i<=NR; i++) { split(lines[i], fields); printf "%" max "d %s\n", fields[1], fields[2]; }}'
 fi
