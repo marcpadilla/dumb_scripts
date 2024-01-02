@@ -25,6 +25,7 @@ cd "$BASE_DIR" || exit
 for dir in **/.svn(/); do
     svnDir=${dir:h}
     echo "Updating SVN in $svnDir"
+    # The SVN command itself will show progress
     svn update "$svnDir" --username $svnUser --password $svnPass --no-auth-cache
 done
 
